@@ -2,6 +2,6 @@ const express = require("express");
 const Home = express.Router();
 
 Home.get("/",(req,res)=>{
-        res.send("home")
+        res.render("Home")
 })
 module.exports = Home
