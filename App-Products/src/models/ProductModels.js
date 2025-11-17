@@ -7,6 +7,7 @@ const ProductSchema = new mongoose.Schema({
                 type : String,
                 required: [true, 'Product name is required'],
                 trim: true,
+                minlength: [2, 'Product name must be at least 2 characters long'],
                 maxlength: [100, 'Product name cannot exceed 100 characters']
         },
         productCategory:{
@@ -20,18 +21,37 @@ const ProductSchema = new mongoose.Schema({
         productPrice: {
                 type: Number,
                 required: [true, 'Product price is required'],
-                min: [0, 'Price cannot be negative']
+                min: [20, 'Price cannot be negative'],
+                validate:{
+                        validator:function(price){
+                                return /^\d+(\.d{1,2})?$/.test(price.toString());
+                        },
+                        message: 'Price can have maximum 2 decimal places'
+                }
         },
         productStock:{
                 type: Number,
                 required: [true, 'Product stock is required'],
                 min: [0, 'Stock cannot be negative'],
-                default: 0
+                default: 1,
+                validate:{
+                        validator:Number.isInteger,
+                        message: 'Stock must be an integer'
+                }
         },
         productDescription:{
                 type: String,
                 required: [true, 'Product description is required'],
-                maxlength: [1000, 'Description cannot exceed 1000 characters']
+                minlength: [10, 'Description must be at least 10 characters long'],
+                maxlength: [1000, 'Description cannot exceed 1000 characters'],
+                // validate:{
+                //         validator:function(desc){
+                //                 const wordCount = desc.trim().split(/\s+/).length;
+                //                 return wordCount >= 10
+                //         },
+                //         message: 'Description must contain at least 10 words'
+                // }
+
         }
 
 })
