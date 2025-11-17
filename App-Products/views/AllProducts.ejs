@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products - HappyShop</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --sunshine: #FFD166;
+            --happy-pink: #EF476F;
+            --ocean-blue: #118AB2;
+            --spring-green: #06D6A0;
+            --lavender: #C8B6FF;
+            --soft-orange: #FF9E6D;
+            --bright-purple: #7209B7;
+        }
+
+        body {
+            font-family: 'Comic Neue', cursive, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--sunshine), var(--soft-orange));
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--ocean-blue), var(--bright-purple));
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .page-title {
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .filter-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .filter-title {
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--bright-purple);
+        }
+
+        .category-filter .form-check {
+            margin-bottom: 10px;
+            padding-left: 0;
+        }
+
+        .category-filter .form-check-input {
+            margin-right: 10px;
+        }
+
+        .price-filter .form-range {
+            margin-bottom: 15px;
+        }
+
+        .sort-options {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .sort-label {
+            font-weight: 600;
+            color: var(--bright-purple);
+        }
+
+        .product-card {
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s, box-shadow 0.4s;
+            margin-bottom: 30px;
+            background: white;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            max-height: 100%;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-category {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .product-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            height: 48px;
+            overflow: hidden;
+            color: var(--bright-purple);
+        }
+
+        .product-price {
+            font-weight: 700;
+            color: var(--ocean-blue);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .product-rating {
+            color: var(--sunshine);
+            margin-bottom: 15px;
+        }
+
+        .btn-add-to-cart {
+            width: 100%;
+            background: linear-gradient(90deg, var(--spring-green), var(--ocean-blue));
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .btn-add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .category-electronics {
+            background-color: var(--ocean-blue);
+        }
+
+        .category-home {
+            background-color: var(--spring-green);
+        }
+
+        .category-fashion {
+            background-color: var(--happy-pink);
+        }
+
+        .category-toys {
+            background-color: var(--sunshine);
+        }
+
+        .category-books {
+            background-color: var(--lavender);
+        }
+
+        .badge-new {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--spring-green);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            z-index: 10;
+        }
+
+        .badge-sale {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--happy-pink);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            z-index: 10;
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .page-link {
+            color: var(--bright-purple);
+            border: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .page-link:hover {
+            background-color: var(--lavender);
+            color: white;
+        }
+
+        .page-item.active .page-link {
+            background-color: var(--bright-purple);
+            border-color: var(--bright-purple);
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--bright-purple), var(--ocean-blue));
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 80px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .footer h5 {
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: white;
+            color: var(--bright-purple);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .floating-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--happy-pink), var(--bright-purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .results-count {
+            color: var(--bright-purple);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .view-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .view-btn {
+            background: white;
+            border: 2px solid var(--lavender);
+            color: var(--bright-purple);
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .view-btn.active {
+            background: var(--bright-purple);
+            color: white;
+            border-color: var(--bright-purple);
+        }
+
+        .view-btn:hover {
+            background: var(--lavender);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">HappyShop</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">All Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Deals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="#" class="btn btn-light me-2">
+                        <i class="bi bi-search"></i>
+                    </a>
+                    <a href="#" class="btn btn-light me-2">
+                        <i class="bi bi-person"></i>
+                    </a>
+                    <a href="#" class="btn btn-light position-relative">
+                        <i class="bi bi-cart"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            3
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">All Products</h1>
+            <p class="page-subtitle">Discover our complete collection of colorful and happy products!</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar Filters -->
+            <div class="col-lg-3">
+                <div class="filter-section">
+                    <h5 class="filter-title">Categories</h5>
+                    <div class="category-filter">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="category1" checked>
+                            <label class="form-check-label" for="category1">
+                                Electronics
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="category2" checked>
+                            <label class="form-check-label" for="category2">
+                                Home & Garden
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="category3" checked>
+                            <label class="form-check-label" for="category3">
+                                Fashion
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="category4">
+                            <label class="form-check-label" for="category4">
+                                Toys & Games
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="category5">
+                            <label class="form-check-label" for="category5">
+                                Books & Stationery
+                            </label>
+                        </div>
+                    </div>
+
+                    <h5 class="filter-title mt-4">Price Range</h5>
+                    <div class="price-filter">
+                        <input type="range" class="form-range" min="0" max="100" step="10" id="priceRange">
+                        <div class="d-flex justify-content-between">
+                            <span>$0</span>
+                            <span>$100+</span>
+                        </div>
+                    </div>
+
+                    <h5 class="filter-title mt-4">Rating</h5>
+                    <div class="rating-filter">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="rating5">
+                            <label class="form-check-label" for="rating5">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                & above
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="rating4">
+                            <label class="form-check-label" for="rating4">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                & above
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="rating3">
+                            <label class="form-check-label" for="rating3">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                & above
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary w-100 mt-4" style="background: linear-gradient(90deg, var(--ocean-blue), var(--spring-green)); border: none;">
+                        Apply Filters
+                    </button>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="col-lg-9">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="results-count">Showing 12 of 48 products</div>
+                    <div class="d-flex align-items-center">
+                        <div class="sort-options me-4">
+                            <span class="sort-label">Sort by:</span>
+                            <select class="form-select" style="width: auto;">
+                                <option selected>Popularity</option>
+                                <option>Price: Low to High</option>
+                                <option>Price: High to Low</option>
+                                <option>Newest First</option>
+                                <option>Highest Rated</option>
+                            </select>
+                        </div>
+                        <div class="view-options">
+                            <button class="view-btn active">
+                                <i class="bi bi-grid-3x3-gap"></i>
+                            </button>
+                            <button class="view-btn">
+                                <i class="bi bi-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Product 1 -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="product-card">
+                            <div class="product-image" style="background-color: #FFE8E8;">
+                                <span class="badge-new">NEW</span>
+                                <img src="https://via.placeholder.com/200x150/FFD166/FFFFFF?text=Sunshine+Speaker" alt="Product">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">
+                                    <span class="category-badge category-electronics">Electronics</span>
+                                </div>
+                                <h3 class="product-title">Sunshine Bluetooth Speaker</h3>
+                                <div class="product-rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                    <span class="ms-1">(42)</span>
+                                </div>
+                                <div class="product-price">$39.99</div>
+                                <button class="btn-add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="product-card">
+                            <div class="product-image" style="background-color: #E8F4F8;">
+                                <span class="badge-sale">SALE</span>
+                                <img src="https://via.placeholder.com/200x150/06D6A0/FFFFFF?text=Happy+Mug" alt="Product">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">
+                                    <span class="category-badge category-home">Home</span>
+                                </div>
+                                <h3 class="product-title">Rainbow Ceramic Mug Set</h3>
+                                <div class="product-rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                    <span class="ms-1">(28)</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="text-decoration-line-through text-muted me-2">$24.99</span>
+                                    $19.99
+                                </div>
+                                <button class="btn-add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="product-card">
+                            <div class="product-image" style="background-color: #F0E8FF;">
+                                <img src="https://via.placeholder.com/200x150/C8B6FF/FFFFFF?text=Colorful+Backpack" alt="Product">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">
+                                    <span class="category-badge category-fashion">Fashion</span>
+                                </div>
+                                <h3 class="product-title">Color Block Backpack</h3>
+                                <div class="product-rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="ms-1">(56)</span>
+                                </div>
+                                <div class="product-price">$49.99</div>
+                                <button class="btn-add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 4 -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="product-card">
+                            <div class="product-image" style="background-color: #FFF4E8;">
+                                <span class="badge-new">NEW</span>
+                                <img src="https://via.placeholder.com/200x150/FF9E6D/FFFFFF?text=Fun+Plant" alt="Product">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">
+                                    <span class="category-badge category-home">Home</span>
+                                </div>
+                                <h3 class="product-title">Happy Face Succulent Pot</h3>
+                                <div class="product-rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                    <i class="bi bi-star"></i>
+                                    <span class="ms-1">(19)</span>
+                                </div>
+                                <div class="product-price">$16.99</div>
+                                <button class="btn-add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 5 -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="product-card">
+                            <div class="product-image" style="background-color: #E8FFEA;">
+                                <img src="https://via.placeholder.com/200x150/EF476F/FFFFFF?text=Rainbow+Notebook" alt="Product">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">
+                                    <span class="category-badge category-books">Stationery</span>
+                                </div>
+                                <h3 class="product-title">Rainbow Spiral Notebook Set</h3>
+                                <div class="product-rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                    <span class="ms-1">(34)</span>
+                                </div>
+                                <div class="product-price">$12.99</div>
+                                <button class="btn-add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 6 -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="product-card">
+                            <div class="product-image" style="background-color: #FFE8F0;">
+                                <span class="badge-sale">SALE</span>
+                                <img src="https://via.placeholder.com/200x150/7209B7/FFFFFF?text=Color+Socks" alt="Product">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">
+                                    <span class="category-badge category-fashion">Fashion</span>
+                                </div>
+                                <h3 class="product-title">Happy Pattern Socks (3-Pack)</h3>
+                                <div class="product-rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                    <span class="ms-1">(47)</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="text-decoration-line-through text-muted me-2">$18.99</span>
+                                    $14.99
+                                </div>
+                                <button class="btn-add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 7 -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="product-card">
+                            <div class="product-image" style="background-color: #E8F8FF;">
+                                <img src="https://via.placeholder.com/200x150/118AB2/FFFFFF?text=Wireless+Earbuds" alt="Product">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">
+                                    <span class="category-badge category-electronics">Electronics</span>
+                                </div>
+                                <h3 class="product-title">Color Pop Wireless Earbuds</h3>
+                                <div class="product-rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                    <span class="ms-1">(31)</span>
+                                </div>
+                                <div class="product-price">$29.99</div>
+                                <button class="btn-add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 8 -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="product-card">
+                            <div class="product-image" style="background-color: #FFF0E8;">
+                                <span class="badge-new">NEW</span>
+                                <img src="https://via.placeholder.com/200x150/FF9E6D/FFFFFF?text=Desk+Organizer" alt="Product">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">
+                                    <span class="category-badge category-home">Home</span>
+                                </div>
+                                <h3 class="product-title">Rainbow Desk Organizer</h3>
+                                <div class="product-rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                    <i class="bi bi-star"></i>
+                                    <span class="ms-1">(22)</span>
+                                </div>
+                                <div class="product-price">$24.99</div>
+                                <button class="btn-add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 9 -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="product-card">
+                            <div class="product-image" style="background-color: #F8E8FF;">
+                                <span class="badge-sale">SALE</span>
+                                <img src="https://via.placeholder.com/200x150/C8B6FF/FFFFFF?text=Color+T-Shirt" alt="Product">
+                            </div>
+                            <div class="product-info">
+                                <div class="product-category">
+                                    <span class="category-badge category-fashion">Fashion</span>
+                                </div>
+                                <h3 class="product-title">Tie-Dye T-Shirt</h3>
+                                <div class="product-rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="ms-1">(63)</span>
+                                </div>
+                                <div class="product-price">
+                                    <span class="text-decoration-line-through text-muted me-2">$22.99</span>
+                                    $17.99
+                                </div>
+                                <button class="btn-add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination-container">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5>HappyShop</h5>
+                    <p>Spreading joy through colorful products since 2023. Our mission is to add a splash of happiness to your everyday life.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Shop</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">All Products</a></li>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="#">Sale Items</a></li>
+                        <li><a href="#">Gift Cards</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Help</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Customer Service</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5>Contact Us</h5>
+                    <p><i class="bi bi-geo-alt me-2"></i> 123 Rainbow Road, Colorville</p>
+                    <p><i class="bi bi-telephone me-2"></i> (555) 123-4567</p>
+                    <p><i class="bi bi-envelope me-2"></i> hello@happyshop.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 HappyShop. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Cart Icon -->
+    <div class="floating-icon">
+        <i class="bi bi-cart"></i>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

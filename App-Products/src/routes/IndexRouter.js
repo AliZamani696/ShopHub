@@ -12,7 +12,7 @@ let products = [
 ]
 module.exports = new class extends BaseRoute{
         async AllProducts(req,res){
-                res.json(products);
+                res.render("AllProducts");
         }
         async FindProduct (req,res){
                 let product = products.find(p=>{
