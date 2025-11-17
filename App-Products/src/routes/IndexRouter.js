@@ -36,8 +36,24 @@ module.exports = new class extends BaseRoute{
                 console.log(products)
         }
         async AddProduct(req,res){
-                products.push(req.body);
-                console.log(products)
+              try{
+                  const {
+                        productName,
+                        productCategory,
+                        productPrice,
+                        productStock,
+                        productDescription,} = req.body
+                        const ProductModel = require("./../models/ProductModels");
+                        let NewProduct = new ProductModel({
+                                productName,
+                                productCategory,
+                                productPrice,
+                                productStock,
+                                productDescription,
+                        })
+                        NewProduct.save()
+              }catch(err){
+                console.error(err)
+              }
         }
-
 }
