@@ -1,33 +1,39 @@
 const BaseRoute = require("./BaseRoute")
-let products = [
-        //pname sort is product name
-        {
-                id:1,
-                Pname : "phone"
-        },
-        {
-                id:2,
-                Pname : "tv"
-        }
-]
+
 module.exports = new class extends BaseRoute{
-        async AllProducts(req,res){
-                res.render("AllProducts");
+        async AllProducts (req,res){
+                try{
+                        const ProductModel = require("./../models/ProductModels");
+                        const products = await ProductModel.find()
+                        console.log(products)
+                        res.render("AllProducts")
+                }catch(err){
+                        console.error(err)
+                }
         }
         async FindProduct (req,res){
-                let product = products.find(p=>{
-                       return (p.id == req.body.id)
-                });
-        console.log(product);
+                try{
+                        const ProductModel = require("./../models/ProductModels");
+                        const productName = req.body.productName
+                        const FindProduct =await  ProductModel.find({productName})
+                }catch(err){
+                        console.log(err)
+                }
         };
         async EditProduct(req,res){
-                products = products.map(p=>{
-                        if(p.id == req.body.id){
-                                return p = req.body
-                        }
-                        return p
-                })
-                console.log(products)
+                     try{
+                        const ProductModel = require("./../models/ProductModels");
+                        const productId = req.params.id
+                        const UpdateProduct = req.body
+                        const FindProduct =await  ProductModel.findByIdAndUpdate(
+                                productId,
+                                UpdateProduct,
+                                {new:true, runValidators: true}
+                        )
+                        console.log(FindProduct)
+                }catch(err){
+                        console.log(err)
+                }
         }
         async DeleteProduct(req,res){
                 products = products.filter(p=>{
@@ -52,10 +58,13 @@ module.exports = new class extends BaseRoute{
                                 productDescription,
                         })
                         NewProduct.save()
-
+                        res.render("AdminDashboard")
 
               }catch(err){
                 console.error(err)
               }
+        }
+        async  Category(req,res){
+                res.render("Category")
         }
 }

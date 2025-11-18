@@ -3,709 +3,333 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HappyShop - Colorful Products</title>
+    <title>Product Showcase - Bootstrap Homepage</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --sunshine: #FFD166;
-            --happy-pink: #EF476F;
-            --ocean-blue: #118AB2;
-            --spring-green: #06D6A0;
-            --lavender: #C8B6FF;
-            --soft-orange: #FF9E6D;
-            --bright-purple: #7209B7;
+                           :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #f72585;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
         }
 
         body {
-            font-family: 'Comic Neue', cursive, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: #333;
-        }
-
-        .navbar {
-            background: linear-gradient(90deg, var(--sunshine), var(--soft-orange));
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .navbar-brand {
             font-weight: 700;
-            font-size: 1.8rem;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-        }
-
-        .nav-link {
-            color: white !important;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .nav-link:hover {
-            transform: translateY(-2px);
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            color: var(--primary-color) !important;
         }
 
         .hero-section {
-            background: linear-gradient(135deg, var(--ocean-blue), var(--bright-purple));
+            background: linear-gradient(rgba(67, 97, 238, 0.8), rgba(58, 12, 163, 0.8)),
+                        url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
             color: white;
-            padding: 80px 0;
-            border-radius: 0 0 50% 50% / 0 0 20% 20%;
-            margin-bottom: 50px;
-            text-align: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .hero-title {
-            font-weight: 800;
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn-hero {
-            background-color: var(--happy-pink);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s;
-        }
-
-        .btn-hero:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-            background-color: #ff2e63;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-            font-weight: 700;
-            color: var(--bright-purple);
-            position: relative;
-        }
-
-        .section-title:after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 6px;
-            background: linear-gradient(90deg, var(--sunshine), var(--happy-pink));
-            margin: 15px auto;
-            border-radius: 3px;
+            padding: 100px 0;
         }
 
         .product-card {
+            transition: transform 0.3s, box-shadow 0.3s;
             border: none;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.4s, box-shadow 0.4s;
-            margin-bottom: 30px;
-            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            height: 100%;
         }
 
         .product-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
 
-        .product-image {
+        .product-img {
             height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .product-image img {
-            max-height: 100%;
-            transition: transform 0.5s;
-        }
-
-        .product-card:hover .product-image img {
-            transform: scale(1.1);
-        }
-
-        .product-info {
-            padding: 20px;
-        }
-
-        .product-category {
-            color: #6c757d;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-        }
-
-        .product-title {
-            font-weight: 700;
-            margin-bottom: 10px;
-            height: 48px;
-            overflow: hidden;
-            color: var(--bright-purple);
-        }
-
-        .product-price {
-            font-weight: 700;
-            color: var(--ocean-blue);
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-        }
-
-        .product-rating {
-            color: var(--sunshine);
-            margin-bottom: 15px;
-        }
-
-        .btn-add-to-cart {
-            width: 100%;
-            background: linear-gradient(90deg, var(--spring-green), var(--ocean-blue));
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 10px;
-            font-weight: 700;
-            transition: all 0.3s;
-        }
-
-        .btn-add-to-cart:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            object-fit: cover;
         }
 
         .category-badge {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: 700;
-            margin-right: 10px;
-            margin-bottom: 10px;
-            color: white;
-        }
-
-        .category-electronics {
-            background-color: var(--ocean-blue);
-        }
-
-        .category-home {
-            background-color: var(--spring-green);
-        }
-
-        .category-fashion {
-            background-color: var(--happy-pink);
-        }
-
-        .category-toys {
-            background-color: var(--sunshine);
-        }
-
-        .category-books {
-            background-color: var(--lavender);
-        }
-
-        .badge-new {
             position: absolute;
             top: 10px;
             right: 10px;
-            background-color: var(--spring-green);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            z-index: 10;
         }
 
-        .badge-sale {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: var(--happy-pink);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
+        .price {
             font-weight: 700;
-            font-size: 0.8rem;
-            z-index: 10;
+            color: var(--primary-color);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
         }
 
         .newsletter-section {
-            background: linear-gradient(135deg, var(--sunshine), var(--soft-orange));
-            padding: 60px 0;
-            margin-top: 50px;
-            border-radius: 20px;
-            text-align: center;
+            background-color: var(--light-color);
+        }
+
+        footer {
+            background-color: var(--dark-color);
             color: white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .newsletter-title {
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .newsletter-form {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .newsletter-input {
-            border: none;
-            border-radius: 50px;
-            padding: 12px 20px;
-            width: 100%;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .footer {
-            background: linear-gradient(135deg, var(--bright-purple), var(--ocean-blue));
-            color: white;
-            padding: 50px 0 20px;
-            margin-top: 80px;
-            border-radius: 20px 20px 0 0;
-        }
-
-        .footer h5 {
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        .footer-links {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: white;
-            padding-left: 5px;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
         }
 
         .social-icons a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
             color: white;
-            transition: all 0.3s;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            transition: color 0.3s;
         }
 
         .social-icons a:hover {
-            background-color: white;
-            color: var(--bright-purple);
-            transform: translateY(-3px);
+            color: var(--accent-color);
         }
 
-        .copyright {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            color: rgba(255, 255, 255, 0.7);
+        .section-title {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
         }
 
-        .floating-icon {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--happy-pink), var(--bright-purple));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+   footer {
+            background-color: var(--dark-color);
             color: white;
-            font-size: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            z-index: 1000;
-            animation: float 3s ease-in-out infinite;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
 
-        .categories-section {
-            margin-bottom: 50px;
-        }
-
-        .category-card {
-            border-radius: 15px;
-            padding: 30px 20px;
-            text-align: center;
-            color: white;
-            margin-bottom: 20px;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-        }
-
-        .category-card i {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-
-        .category-card h4 {
-            font-weight: 700;
-        }
     </style>
+
+
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">HappyShop</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Categories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Deals</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                </ul>
-                <div class="d-flex">
-                    <a href="#" class="btn btn-light me-2">
-                        <i class="bi bi-search"></i>
-                    </a>
-                    <a href="#" class="btn btn-light me-2">
-                        <i class="bi bi-person"></i>
-                    </a>
-                    <a href="#" class="btn btn-light position-relative">
-                        <i class="bi bi-cart"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            3
-                        </span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
 
+    <!-- Navigation -->
+     <%- include("./Navbar")%>
     <!-- Hero Section -->
-    <section class="hero-section">
+    <section class="hero-section text-center">
         <div class="container">
-            <h1 class="hero-title">Discover Happy Products!</h1>
-            <p class="hero-subtitle">Brighten your day with our colorful collection of fun and cheerful products for every occasion.</p>
-            <a href="#products" class="btn btn-hero">Shop Now</a>
+            <h1 class="display-4 fw-bold mb-4">Discover Amazing Products</h1>
+            <p class="lead mb-4">Shop the latest trends and find exactly what you're looking for</p>
+            <a href="#products" class="btn btn-light btn-lg px-4">Shop Now</a>
         </div>
     </section>
 
-    <!-- Categories Section -->
-    <section class="categories-section">
+    <!-- Featured Categories -->
+    <section class="py-5" name="Category">
         <div class="container">
             <h2 class="section-title">Shop by Category</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="category-card" style="background: linear-gradient(135deg, var(--ocean-blue), var(--spring-green));">
-                        <i class="bi bi-phone"></i>
-                        <h4>Electronics</h4>
-                        <p>Colorful gadgets and tech</p>
+            <div class="row g-4">
+                <div class="col-md-3 col-sm-6">
+                    <div class="card category-card text-center border-0">
+                        <div class="card-body p-4">
+                            <i class="fas fa-laptop fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Electronics</h5>
+                            <p class="card-text">Latest gadgets and tech</p>
+                            <button type="submit"  name="category" value="Electronics"  class="btn btn-outline-primary">Browse</button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="category-card" style="background: linear-gradient(135deg, var(--happy-pink), var(--lavender));">
-                        <i class="bi bi-house-door"></i>
-                        <h4>Home & Garden</h4>
-                        <p>Brighten your space</p>
+                <div class="col-md-3 col-sm-6">
+                    <div class="card category-card text-center border-0">
+                        <div class="card-body p-4">
+                            <i class="fas fa-tshirt fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Fashion</h5>
+                            <p class="card-text">Trendy clothes & accessories</p>
+                            <button href="#" name="category" value="Fashion" type="submit" class="btn btn-outline-primary">Browse</button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="category-card" style="background: linear-gradient(135deg, var(--sunshine), var(--soft-orange));">
-                        <i class="bi bi-bag"></i>
-                        <h4>Fashion</h4>
-                        <p>Wear your happiness</p>
+                <div class="col-md-3 col-sm-6">
+                    <div class="card category-card text-center border-0">
+                        <div class="card-body p-4">
+                            <i class="fas fa-home fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Home & Garden</h5>
+                            <p class="card-text">Everything for your home</p>
+                            <button href="#" type="submit" name="category" value="HomeGarden" class="btn btn-outline-primary">Browse</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="card category-card text-center border-0">
+                        <div class="card-body p-4">
+                            <i class="fas fa-dumbbell fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Sports</h5>
+                            <p class="card-text">Equipment & accessories</p>
+                            <button type="submit" name="category" value="Sports" href="#" class="btn btn-outline-primary">Browse</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Products Section -->
-    <section class="container" id="products">
-        <h2 class="section-title">Featured Products</h2>
-
-        <div class="row">
-            <!-- Product 1 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="product-card">
-                    <div class="product-image" style="background-color: #FFE8E8;">
-                        <span class="badge-new">NEW</span>
-                        <img src="https://via.placeholder.com/200x150/FFD166/FFFFFF?text=Sunshine+Speaker" alt="Product">
+    <!-- Featured Products -->
+    <section id="products" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="row g-4">
+                <!-- Product 1 -->
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card product-card">
+                        <span class="badge bg-success category-badge">New</span>
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top product-img" alt="Product 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Wireless Headphones</h5>
+                            <p class="card-text">High-quality sound with noise cancellation</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">$129.99</span>
+                                <a href="#" class="btn btn-primary">
+                                    <i class="fas fa-cart-plus me-1"></i> Add to Cart
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="product-info">
-                        <div class="product-category">
-                            <span class="category-badge category-electronics">Electronics</span>
+                </div>
+                <!-- Product 2 -->
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card product-card">
+                        <span class="badge bg-danger category-badge">Sale</span>
+                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top product-img" alt="Product 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Smart Watch</h5>
+                            <p class="card-text">Track your fitness and stay connected</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price"><del class="text-muted">$199.99</del> $149.99</span>
+                                <a href="#" class="btn btn-primary">
+                                    <i class="fas fa-cart-plus me-1"></i> Add to Cart
+                                </a>
+                            </div>
                         </div>
-                        <h3 class="product-title">Sunshine Bluetooth Speaker</h3>
-                        <div class="product-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                            <span class="ms-1">(42)</span>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card product-card">
+                        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top product-img" alt="Product 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Bluetooth Speaker</h5>
+                            <p class="card-text">Portable speaker with amazing sound</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">$79.99</span>
+                                <a href="#" class="btn btn-primary">
+                                    <i class="fas fa-cart-plus me-1"></i> Add to Cart
+                                </a>
+                            </div>
                         </div>
-                        <div class="product-price">$39.99</div>
-                        <button class="btn-add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <!-- Product 4 -->
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card product-card">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top product-img" alt="Product 4">
+                        <div class="card-body">
+                            <h5 class="card-title">Running Shoes</h5>
+                            <p class="card-text">Comfortable shoes for your active lifestyle</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price">$89.99</span>
+                                <a href="#" class="btn btn-primary">
+                                    <i class="fas fa-cart-plus me-1"></i> Add to Cart
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Product 2 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="product-card">
-                    <div class="product-image" style="background-color: #E8F4F8;">
-                        <span class="badge-sale">SALE</span>
-                        <img src="https://via.placeholder.com/200x150/06D6A0/FFFFFF?text=Happy+Mug" alt="Product">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">
-                            <span class="category-badge category-home">Home</span>
-                        </div>
-                        <h3 class="product-title">Rainbow Ceramic Mug Set</h3>
-                        <div class="product-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star"></i>
-                            <span class="ms-1">(28)</span>
-                        </div>
-                        <div class="product-price">
-                            <span class="text-decoration-line-through text-muted me-2">$24.99</span>
-                            $19.99
-                        </div>
-                        <button class="btn-add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
+            <div class="text-center mt-5">
+                <a href="/AllProducts" class="btn btn-outline-primary btn-lg">View All Products</a>
             </div>
+        </div>
+    </section>
 
-            <!-- Product 3 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="product-card">
-                    <div class="product-image" style="background-color: #F0E8FF;">
-                        <img src="https://via.placeholder.com/200x150/C8B6FF/FFFFFF?text=Colorful+Backpack" alt="Product">
+    <!-- Features Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center">Why Shop With Us</h2>
+            <div class="row g-4 mt-3">
+                <div class="col-md-4 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
                     </div>
-                    <div class="product-info">
-                        <div class="product-category">
-                            <span class="category-badge category-fashion">Fashion</span>
-                        </div>
-                        <h3 class="product-title">Color Block Backpack</h3>
-                        <div class="product-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <span class="ms-1">(56)</span>
-                        </div>
-                        <div class="product-price">$49.99</div>
-                        <button class="btn-add-to-cart">Add to Cart</button>
-                    </div>
+                    <h4>Free Shipping</h4>
+                    <p>Free shipping on all orders over $50. Fast delivery to your doorstep.</p>
                 </div>
-            </div>
-
-            <!-- Product 4 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="product-card">
-                    <div class="product-image" style="background-color: #FFF4E8;">
-                        <span class="badge-new">NEW</span>
-                        <img src="https://via.placeholder.com/200x150/FF9E6D/FFFFFF?text=Fun+Plant" alt="Product">
+                <div class="col-md-4 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo-alt"></i>
                     </div>
-                    <div class="product-info">
-                        <div class="product-category">
-                            <span class="category-badge category-home">Home</span>
-                        </div>
-                        <h3 class="product-title">Happy Face Succulent Pot</h3>
-                        <div class="product-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                            <i class="bi bi-star"></i>
-                            <span class="ms-1">(19)</span>
-                        </div>
-                        <div class="product-price">$16.99</div>
-                        <button class="btn-add-to-cart">Add to Cart</button>
-                    </div>
+                    <h4>Easy Returns</h4>
+                    <p>Not satisfied? Return within 30 days for a full refund, no questions asked.</p>
                 </div>
-            </div>
-
-            <!-- Product 5 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="product-card">
-                    <div class="product-image" style="background-color: #E8FFEA;">
-                        <img src="https://via.placeholder.com/200x150/EF476F/FFFFFF?text=Rainbow+Notebook" alt="Product">
+                <div class="col-md-4 text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
                     </div>
-                    <div class="product-info">
-                        <div class="product-category">
-                            <span class="category-badge category-books">Stationery</span>
-                        </div>
-                        <h3 class="product-title">Rainbow Spiral Notebook Set</h3>
-                        <div class="product-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star"></i>
-                            <span class="ms-1">(34)</span>
-                        </div>
-                        <div class="product-price">$12.99</div>
-                        <button class="btn-add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product 6 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="product-card">
-                    <div class="product-image" style="background-color: #FFE8F0;">
-                        <span class="badge-sale">SALE</span>
-                        <img src="https://via.placeholder.com/200x150/7209B7/FFFFFF?text=Color+Socks" alt="Product">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">
-                            <span class="category-badge category-fashion">Fashion</span>
-                        </div>
-                        <h3 class="product-title">Happy Pattern Socks (3-Pack)</h3>
-                        <div class="product-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                            <span class="ms-1">(47)</span>
-                        </div>
-                        <div class="product-price">
-                            <span class="text-decoration-line-through text-muted me-2">$18.99</span>
-                            $14.99
-                        </div>
-                        <button class="btn-add-to-cart">Add to Cart</button>
-                    </div>
+                    <h4>Secure Payment</h4>
+                    <p>Your payment information is safe with our encrypted checkout process.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Newsletter Section -->
-    <section class="newsletter-section">
+    <section class="newsletter-section py-5">
         <div class="container">
-            <h2 class="newsletter-title">Join Our Happy Community!</h2>
-            <p class="mb-4">Get exclusive deals, colorful inspiration, and happiness delivered to your inbox.</p>
-            <div class="newsletter-form">
-                <input type="email" class="newsletter-input" placeholder="Your email address">
-                <button class="btn btn-hero w-100">Subscribe to Happiness</button>
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <h3>Subscribe to Our Newsletter</h3>
+                    <p class="mb-4">Get the latest updates on new products and upcoming sales</p>
+                    <form class="row g-2 justify-content-center">
+                        <div class="col-sm-8">
+                            <input type="email" class="form-control form-control-lg" placeholder="Your email address">
+                        </div>
+                        <div class="col-sm-auto">
+                            <button type="submit" class="btn btn-primary btn-lg w-100">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <h5>HappyShop</h5>
-                    <p>Spreading joy through colorful products since 2023. Our mission is to add a splash of happiness to your everyday life.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="bi bi-facebook"></i></a>
-                        <a href="#"><i class="bi bi-instagram"></i></a>
-                        <a href="#"><i class="bi bi-twitter"></i></a>
-                        <a href="#"><i class="bi bi-pinterest"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 mb-4">
-                    <h5>Shop</h5>
-                    <ul class="footer-links">
-                        <li><a href="#">All Products</a></li>
-                        <li><a href="#">New Arrivals</a></li>
-                        <li><a href="#">Best Sellers</a></li>
-                        <li><a href="#">Sale Items</a></li>
-                        <li><a href="#">Gift Cards</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-6 mb-4">
-                    <h5>Help</h5>
-                    <ul class="footer-links">
-                        <li><a href="#">Customer Service</a></li>
-                        <li><a href="#">Shipping Info</a></li>
-                        <li><a href="#">Returns</a></li>
-                        <li><a href="#">Size Guide</a></li>
-                        <li><a href="#">FAQs</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <h5>Contact Us</h5>
-                    <p><i class="bi bi-geo-alt me-2"></i> 123 Rainbow Road, Colorville</p>
-                    <p><i class="bi bi-telephone me-2"></i> (555) 123-4567</p>
-                    <p><i class="bi bi-envelope me-2"></i> hello@happyshop.com</p>
-                </div>
-            </div>
-            <div class="copyright">
-                &copy; 2023 HappyShop. All rights reserved.
-            </div>
-        </div>
-    </footer>
-
-    <!-- Floating Cart Icon -->
-    <div class="floating-icon">
-        <i class="bi bi-cart"></i>
-    </div>
+    <%- include("./Footer") %>
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/public/js/InedxScript.js"></script>
+
 </body>
 </html>

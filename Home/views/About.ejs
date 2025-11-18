@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - ShopName</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/public/css/AboutStyle.css">
+    <style>
+                :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #f72585;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(67, 97, 238, 0.9), rgba(58, 12, 163, 0.9)),
+                        url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-light {
+            background-color: #f8f9fa;
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .section-title.text-center::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .about-img {
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .team-img {
+            height: 250px;
+            object-fit: cover;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+        }
+
+        .team-social {
+            margin-top: 1rem;
+        }
+
+        .team-social a {
+            color: #6c757d;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .team-social a:hover {
+            color: var(--primary-color);
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-radius: 0.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--primary-color);
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .contact-info {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .contact-info li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .contact-info i {
+            color: var(--primary-color);
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
+   footer {
+            background-color: var(--dark-color);
+            color: white;
+        }
+
+    </style>
+
+</head>
+<body>
+    <!-- Navigation -->
+    <%- include("./Navbar") %>
+
+    <!-- Page Header -->
+     <%- include("./AboutAndContactHeader") %>
+
+    <!-- Our Story Section -->
+    <section class="section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="section-title">Our Story</h2>
+                    <p class="mb-4">Founded in 2015, ShopName began as a small passion project with a simple mission: to make quality products accessible to everyone at affordable prices. What started as a humble online store has grown into a trusted e-commerce platform serving customers worldwide.</p>
+                    <p class="mb-4">Our journey hasn't been without challenges, but our commitment to customer satisfaction and product quality has remained unwavering. We've continuously evolved our offerings based on customer feedback and market trends, ensuring we stay relevant and valuable to our community.</p>
+                    <p>Today, we're proud to offer thousands of products across multiple categories, all backed by our satisfaction guarantee and exceptional customer service. As we look to the future, we remain dedicated to our core values and to providing an outstanding shopping experience for every customer.</p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Our Story" class="img-fluid about-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values Section -->
+    <section class="section section-light">
+        <div class="container">
+            <h2 class="section-title text-center">Our Values</h2>
+            <p class="text-center mb-5">These core principles guide everything we do at ShopName</p>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Customer First</h4>
+                        <p>Our customers are at the heart of everything we do. We listen to feedback, respond to needs, and continuously improve to provide the best shopping experience.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h4>Quality Assurance</h4>
+                        <p>We carefully curate our product selection and work with trusted suppliers to ensure every item meets our high standards for quality and value.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Trust & Transparency</h4>
+                        <p>We believe in building relationships based on trust. Our policies are clear, our pricing is transparent, and we stand behind every product we sell.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h4>Fast & Reliable</h4>
+                        <p>We understand the importance of timely delivery. Our logistics network ensures your orders reach you quickly and in perfect condition.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h4>Sustainability</h4>
+                        <p>We're committed to reducing our environmental impact through sustainable packaging, ethical sourcing, and responsible business practices.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <h4>Community Focus</h4>
+                        <p>We believe in giving back. A portion of every purchase supports local communities and charitable initiatives that align with our values.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Team Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title text-center">Meet Our Team</h2>
+            <p class="text-center mb-5">The passionate people behind ShopName's success</p>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card team-card">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top team-img" alt="Team Member">
+                        <div class="card-body">
+                            <h5 class="card-title">John Smith</h5>
+                            <p class="card-text text-muted">CEO & Founder</p>
+                            <p class="card-text">With over 15 years of e-commerce experience, John founded ShopName with a vision to revolutionize online shopping.</p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card team-card">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top team-img" alt="Team Member">
+                        <div class="card-body">
+                            <h5 class="card-title">Sarah Johnson</h5>
+                            <p class="card-text text-muted">Head of Operations</p>
+                            <p class="card-text">Sarah ensures our logistics and customer service run smoothly, making sure every order exceeds expectations.</p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card team-card">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top team-img" alt="Team Member">
+                        <div class="card-body">
+                            <h5 class="card-title">Michael Chen</h5>
+                            <p class="card-text text-muted">Marketing Director</p>
+                            <p class="card-text">Michael leads our marketing efforts, connecting with customers and sharing the ShopName story with the world.</p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card team-card">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" class="card-img-top team-img" alt="Team Member">
+                        <div class="card-body">
+                            <h5 class="card-title">Emily Rodriguez</h5>
+                            <p class="card-text text-muted">Product Curator</p>
+                            <p class="card-text">Emily's keen eye for quality and trends helps us select the best products that our customers will love.</p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section section-light">
+        <div class="container">
+            <h2 class="section-title text-center">By The Numbers</h2>
+            <p class="text-center mb-5">Our growth and impact in numbers</p>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-number">50K+</div>
+                        <h5>Happy Customers</h5>
+                        <p class="text-muted">Served worldwide</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-number">10K+</div>
+                        <h5>Products</h5>
+                        <p class="text-muted">Across multiple categories</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-number">98%</div>
+                        <h5>Customer Satisfaction</h5>
+                        <p class="text-muted">Based on reviews</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-number">50+</div>
+                        <h5>Countries</h5>
+                        <p class="text-muted">We ship to worldwide</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title text-center">Our Journey</h2>
+            <p class="text-center mb-5">Key milestones in ShopName's history</p>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h4>2015</h4>
+                            <p class="text-muted">ShopName founded with a small selection of electronics and home goods</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>2016</h4>
+                            <p class="text-muted">Reached 1,000 customers and expanded product categories to include fashion</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>2017</h4>
+                            <p class="text-muted">Launched mobile app and introduced express shipping options</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>2018</h4>
+                            <p class="text-muted">Expanded internationally, shipping to over 20 countries</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>2019</h4>
+                            <p class="text-muted">Reached 10,000 product listings and 25,000 customers</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>2020</h4>
+                            <p class="text-muted">Introduced sustainable packaging and carbon-neutral shipping options</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>2021</h4>
+                            <p class="text-muted">Launched premium membership program with exclusive benefits</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>2022</h4>
+                            <p class="text-muted">Reached 50,000 customers and expanded to 50+ countries</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>2023</h4>
+                            <p class="text-muted">Celebrated 8 years of serving customers with quality products</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h2 class="mb-4">Join Our Growing Community</h2>
+                    <p class="mb-4">Become part of the ShopName family and enjoy exclusive benefits, early access to sales, and personalized recommendations.</p>
+                    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+                        <a href="products.html" class="btn btn-primary btn-lg">Shop Now</a>
+                        <a href="contact.html" class="btn btn-outline-primary btn-lg">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+     <%- include("./Footer") %>
+
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
