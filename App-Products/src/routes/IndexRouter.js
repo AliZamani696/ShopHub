@@ -71,6 +71,7 @@ module.exports = new class extends BaseRoute{
               }catch(err){
                 console.error(err)
               }
+
         }
         async  Category(req,res){
                 res.render("Category")
