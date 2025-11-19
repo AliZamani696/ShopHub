@@ -12,8 +12,10 @@ let checkBoxSale = document.getElementById("flexSwitchCheckDisabled")
 checkBoxSale.addEventListener("change",(e)=>{
         if(checkBoxSale.checked){
                 checkBoxSale.value = true
+                console.log(checkBoxSale.value)
         }else{
                 checkBoxSale.value = false
+                console.log(checkBoxSale.value)
         }
         e.preventDefault()
 })
